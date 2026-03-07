@@ -1,0 +1,49 @@
+{
+  "_comment": "This file contains test data structure templates. For actual test data generation, use agent-test-data or load from environment variables.",
+  "users": [
+    {
+      "id": 1,
+      "username": "${APP_USER_ISB_DEV}",
+      "password": "${APP_PASSWORD_ISB_DEV}",
+      "email": "${TEST_USER_EMAIL_1:-testuser1@example.com}",
+      "firstName": "Test",
+      "lastName": "User1"
+    },
+    {
+      "id": 2,
+      "username": "${TEST_USER_2:-testuser2}",
+      "password": "${TEST_PASSWORD_2:-}",
+      "email": "${TEST_USER_EMAIL_2:-testuser2@example.com}",
+      "firstName": "Test",
+      "lastName": "User2"
+    }
+  ],
+  "testScenarios": [
+    {
+      "id": "TS001",
+      "name": "Valid Login",
+      "username": "${APP_USER_ISB_DEV}",
+      "password": "${APP_PASSWORD_ISB_DEV}",
+      "expectedResult": "Dashboard displayed"
+    },
+    {
+      "id": "TS002",
+      "name": "Invalid Login",
+      "username": "invalid_user_${TIMESTAMP}",
+      "password": "wrong_password",
+      "expectedResult": "Error message displayed"
+    }
+  ],
+  "searchQueries": [
+    {
+      "id": "SQ001",
+      "query": "automation",
+      "expectedMinResults": 1
+    },
+    {
+      "id": "SQ002",
+      "query": "testing",
+      "expectedMinResults": 1
+    }
+  ]
+}

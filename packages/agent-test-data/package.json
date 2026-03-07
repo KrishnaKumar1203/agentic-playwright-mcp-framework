@@ -1,0 +1,22 @@
+{
+  "name": "@agents/agent-test-data",
+  "version": "1.0.0",
+  "description": "Dynamic test data generation agent",
+  "type": "module",
+  "main": "./dist/test-data-generator.js",
+  "types": "./dist/test-data-generator.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@agents/agents-core": "workspace:*",
+    "@faker-js/faker": "^8.3.1",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "typescript": "^5.3.3"
+  }
+}

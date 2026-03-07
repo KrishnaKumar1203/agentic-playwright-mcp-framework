@@ -1,0 +1,24 @@
+{
+  "name": "@agents/agent-self-healing",
+  "version": "1.0.0",
+  "description": "Advanced self-healing for selectors and test recovery",
+  "type": "module",
+  "main": "./dist/self-healer.js",
+  "types": "./dist/self-healer.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@agents/agents-core": "workspace:*",
+    "@playwright/test": "^1.40.0",
+    "cheerio": "^1.0.0-rc.12",
+    "string-similarity": "^4.0.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@types/string-similarity": "^4.0.0",
+    "typescript": "^5.3.3"
+  }
+}

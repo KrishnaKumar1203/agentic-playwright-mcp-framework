@@ -1,0 +1,20 @@
+{
+  "name": "@agents/agent-codegen",
+  "version": "1.0.0",
+  "description": "Agent for code generation from specifications",
+  "type": "module",
+  "main": "./dist/spec-generator.js",
+  "types": "./dist/spec-generator.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@agents/agents-core": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "typescript": "^5.3.3"
+  }
+}

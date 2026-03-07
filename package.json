@@ -1,0 +1,44 @@
+{
+  "name": "agentic-playwright-mcp-framework",
+  "version": "1.0.0",
+  "description": "Agentic Playwright MCP Framework for intelligent test automation",
+  "type": "module",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev --workspaces\" --prefix-colors=auto",
+    "build": "npm run build --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "pipeline": "node scripts/run-pipeline.js",
+    "clean": "node scripts/clean-artifacts.js",
+    "reports": "node scripts/generate-reports.js",
+    "install-all": "npm install --workspaces",
+    "lint": "npm run lint --workspaces --if-present",
+    "type-check": "npm run type-check --workspaces --if-present"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.40.0",
+    "@types/node": "^20.10.0",
+    "concurrently": "^8.2.2",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "axios": "^1.6.2",
+    "dotenv": "^16.3.1",
+    "pino": "^8.17.2",
+    "uuid": "^9.0.1",
+    "@anthropic-ai/sdk": "^0.20.0",
+    "openai": "^4.52.0",
+    "@faker-js/faker": "^8.3.1",
+    "cheerio": "^1.0.0-rc.12",
+    "jsdom": "^23.0.1",
+    "diff": "^5.1.0",
+    "sql-bricks": "^3.6.2",
+    "sql-parser-cst": "^2.3.2"
+  }
+}

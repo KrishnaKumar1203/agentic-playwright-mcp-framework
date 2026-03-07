@@ -1,0 +1,23 @@
+{
+  "name": "@agents/agent-ai-planner",
+  "version": "1.0.0",
+  "description": "AI-powered test plan generation using LLM",
+  "type": "module",
+  "main": "./dist/ai-planner.js",
+  "types": "./dist/ai-planner.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@agents/agents-core": "workspace:*",
+    "openai": "^4.52.0",
+    "@anthropic-ai/sdk": "^0.20.0",
+    "axios": "^1.6.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "typescript": "^5.3.3"
+  }
+}

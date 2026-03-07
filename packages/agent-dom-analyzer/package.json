@@ -1,0 +1,23 @@
+{
+  "name": "@agents/agent-dom-analyzer",
+  "version": "1.0.0",
+  "description": "DOM change detection and analysis agent",
+  "type": "module",
+  "main": "./dist/dom-analyzer.js",
+  "types": "./dist/dom-analyzer.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@agents/agents-core": "workspace:*",
+    "cheerio": "^1.0.0-rc.12",
+    "diff": "^5.1.0",
+    "@playwright/test": "^1.40.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "typescript": "^5.3.3"
+  }
+}

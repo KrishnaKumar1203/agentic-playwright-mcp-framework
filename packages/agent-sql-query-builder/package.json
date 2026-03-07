@@ -1,0 +1,24 @@
+{
+  "name": "@agents/agent-sql-query-builder",
+  "version": "1.0.0",
+  "description": "SQL query validator and builder - generates safe SELECT queries only, prevents DELETE/INSERT/UPDATE",
+  "type": "module",
+  "main": "dist/sql-query-builder.js",
+  "types": "dist/sql-query-builder.d.ts",
+  "exports": {
+    ".": "./dist/sql-query-builder.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@agents/agents-core": "workspace:*",
+    "sql-bricks": "^3.6.2",
+    "sql-parser-cst": "^2.3.2",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0"
+  }
+}

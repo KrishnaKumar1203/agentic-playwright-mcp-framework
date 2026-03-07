@@ -1,0 +1,22 @@
+{
+  "name": "@agents/agent-failure-analyzer",
+  "version": "1.0.0",
+  "description": "Automated test failure analysis with AI-powered suggestions",
+  "type": "module",
+  "main": "./dist/failure-analyzer.js",
+  "types": "./dist/failure-analyzer.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@agents/agents-core": "workspace:*",
+    "openai": "^4.52.0",
+    "axios": "^1.6.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "typescript": "^5.3.3"
+  }
+}

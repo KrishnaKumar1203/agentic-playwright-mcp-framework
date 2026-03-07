@@ -1,0 +1,26 @@
+{
+  "name": "@agents/agent-api-gateway",
+  "version": "1.0.0",
+  "description": "Modern API Gateway Agent - API management, orchestration, documentation, testing, and monitoring",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "echo 'Test suite for agent-api-gateway'"
+  },
+  "dependencies": {
+    "@agents/agents-core": "workspace:*",
+    "axios": "^1.6.2",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.0",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3",
+    "@types/node": "^20.10.0",
+    "@types/express": "^4.17.21"
+  }
+}

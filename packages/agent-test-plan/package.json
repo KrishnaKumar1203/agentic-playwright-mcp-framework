@@ -1,0 +1,20 @@
+{
+  "name": "@agents/agent-test-plan",
+  "version": "1.0.0",
+  "description": "Agent for VSTP (Vendor Specific Test Plan) builder",
+  "type": "module",
+  "main": "./dist/vstp-builder.js",
+  "types": "./dist/vstp-builder.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@agents/agents-core": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "typescript": "^5.3.3"
+  }
+}
