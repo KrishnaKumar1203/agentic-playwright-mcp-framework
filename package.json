@@ -6,10 +6,7 @@
   "engines": {
     "node": ">=18.0.0"
   },
-  "workspaces": [
-    "packages/*",
-    "apps/*"
-  ],
+
   "scripts": {
     "dev": "concurrently \"npm run dev --workspaces\" --prefix-colors=auto",
     "build": "npm run build --workspaces --if-present",

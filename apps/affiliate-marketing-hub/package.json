@@ -4,22 +4,21 @@
   "description": "Modern Affiliate Marketing Platform - Add and manage products for affiliate marketing",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 3000",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 3000",
     "lint": "next lint",
     "export": "next export"
   },
   "dependencies": {
-    "next": "^14.0.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "axios": "^1.6.0",
-    "zustand": "^4.4.0",
-    "framer-motion": "^10.16.0",
-    "react-icons": "^4.12.0",
-    "react-toastify": "^9.1.0",
-    "next-image-export-optimizer": "^2.5.0"
+    "next": "14.0.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "axios": "1.6.2",
+    "zustand": "4.4.0",
+    "framer-motion": "10.16.0",
+    "react-icons": "4.12.0",
+    "react-toastify": "9.1.0"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
