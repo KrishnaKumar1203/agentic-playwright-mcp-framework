@@ -52,3 +52,10 @@ export abstract class BaseAgent<In = any, Out = any> {
     return this.id;
   }
 }
+
+// Export Agent class from Agent.ts
+export { Agent } from './Agent.js';
+
+// Export MCP integration classes
+export { MCPServer } from './MCPServer.js';
+export { MCPClient } from './MCPClient.js';

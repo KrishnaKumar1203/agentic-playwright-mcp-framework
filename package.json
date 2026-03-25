@@ -12,6 +12,7 @@
     "build": "npm run build --workspaces --if-present",
     "test": "npm run test --workspaces --if-present",
     "pipeline": "node scripts/run-pipeline.js",
+    "pipeline:mcp": "node scripts/run-mcp-pipeline.js",
     "clean": "node scripts/clean-artifacts.js",
     "reports": "node scripts/generate-reports.js",
     "install-all": "npm install --workspaces",
@@ -36,6 +37,7 @@
     "jsdom": "^23.0.1",
     "diff": "^5.1.0",
     "sql-bricks": "^3.6.2",
-    "sql-parser-cst": "^2.3.2"
+    "sql-parser-cst": "^2.3.2",
+    "@modelcontextprotocol/sdk": "^0.5.0"
   }
 }
