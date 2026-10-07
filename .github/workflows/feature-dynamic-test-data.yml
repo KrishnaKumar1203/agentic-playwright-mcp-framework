@@ -1,0 +1,17 @@
+name: Feature - Dynamic test data
+
+on:
+  push:
+    paths:
+      - "packages/agent-test-data/**"
+  pull_request:
+    paths:
+      - "packages/agent-test-data/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    uses: ./.github/workflows/framework-checks.yml

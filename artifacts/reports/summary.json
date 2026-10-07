@@ -1,0 +1,18 @@
+{
+  "id": "e91754fa-7665-4f6f-a171-28cfc081d5c1",
+  "taskId": "task-agent-report-composer-1791375290785",
+  "result": {
+    "id": "e91754fa-7665-4f6f-a171-28cfc081d5c1",
+    "result": {
+      "reportId": "REPORT-1791375290892",
+      "title": "Test Execution Report",
+      "summary": {},
+      "details": [],
+      "timestamp": "2026-10-07T12:14:50.892Z"
+    },
+    "status": "success",
+    "timestamp": "2026-10-07T12:14:50.892Z"
+  },
+  "status": "success",
+  "timestamp": "2026-10-07T12:14:50.892Z"
+}

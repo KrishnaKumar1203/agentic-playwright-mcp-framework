@@ -1,0 +1,19 @@
+name: Feature - Self-healing tests
+
+on:
+  push:
+    paths:
+      - "packages/agent-healer/**"
+      - "packages/agent-self-healing/**"
+  pull_request:
+    paths:
+      - "packages/agent-healer/**"
+      - "packages/agent-self-healing/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    uses: ./.github/workflows/framework-checks.yml

@@ -11,7 +11,7 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@agents/agents-core": "workspace:*",
+    "@agents/agents-core": "^1.0.0",
     "@playwright/test": "^1.40.0",
     "cheerio": "^1.0.0-rc.12",
     "string-similarity": "^4.0.4"

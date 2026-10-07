@@ -10,23 +10,18 @@
  * - As MCP server: node mcp-server.js
  */
 
+import { MCPServer } from './MCPServer.js';
+
 export async function startAgentServer(
   agent: any,
   __filename: string,
   __dirname: string
 ): Promise<void> {
-  import('url').then(({ fileURLToPath }) => {
-    const currentModule = fileURLToPath(import.meta.url);
-    
-    // Only start server if this file is run directly
-    if (currentModule === __filename) {
-      import('@agents/agents-core').then(({ MCPServer }) => {
-        const server = new MCPServer(agent);
-        server.start().catch((error) => {
-          console.error('Failed to start MCP server:', error);
-          process.exit(1);
-        });
-      });
-    }
-  });
+  const { fileURLToPath } = await import('url');
+  const currentModule = fileURLToPath(import.meta.url);
+
+  if (currentModule === __filename) {
+    const server = new MCPServer(agent);
+    await server.start();
+  }
 }

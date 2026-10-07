@@ -10,7 +10,7 @@
     "test": "echo 'Test suite for agent-api-gateway'"
   },
   "dependencies": {
-    "@agents/agents-core": "workspace:*",
+    "@agents/agents-core": "^1.0.0",
     "axios": "^1.6.2",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",

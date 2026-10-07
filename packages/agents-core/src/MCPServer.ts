@@ -3,13 +3,16 @@ import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js'
 import {
   CallToolRequest,
   CallToolRequestSchema,
-  ListToolsRequest,
   ListToolsRequestSchema,
   Tool,
 } from '@modelcontextprotocol/sdk/types.js';
 import { Agent } from './Agent.js';
 import { AgentInput, AgentOutput } from './index.js';
 import pino from 'pino';
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === 'object' && value !== null && !Array.isArray(value);
+}
 
 /**
  * MCP Server Wrapper for Agents
@@ -22,10 +25,13 @@ export class MCPServer {
 
   constructor(agent: Agent) {
     this.agent = agent;
-    this.logger = pino({
-      name: `mcp-server:${agent.getName()}`,
-      level: process.env.LOG_LEVEL || 'info',
-    });
+    this.logger = pino(
+      {
+        name: `mcp-server:${agent.getName()}`,
+        level: process.env.LOG_LEVEL || 'info',
+      },
+      pino.destination(2)
+    );
 
     this.server = new Server(
       {
@@ -44,7 +50,7 @@ export class MCPServer {
 
   private setupHandlers(): void {
     // List tools handler
-    this.server.setRequestHandler(ListToolsRequest, async () => {
+    this.server.setRequestHandler(ListToolsRequestSchema, async () => {
       this.logger.debug('Received ListTools request');
       return {
         tools: this.getToolDefinitions(),
@@ -53,9 +59,13 @@ export class MCPServer {
 
     // Call tool handler (the main execution handler)
     this.server.setRequestHandler(
-      CallToolRequest,
-      async (request: CallToolRequestSchema) => {
-        const { name, arguments: args } = request;
+      CallToolRequestSchema,
+      async (request: CallToolRequest) => {
+        const { name, arguments: args = {} } = request.params;
+        const taskId =
+          typeof args.taskId === 'string' && args.taskId.length > 0
+            ? args.taskId
+            : `task-${Date.now()}`;
         this.logger.info({ tool: name, args }, 'Executing tool');
 
         try {
@@ -73,9 +83,9 @@ export class MCPServer {
 
           // Execute the agent with provided arguments
           const agentInput: AgentInput = {
-            taskId: args.taskId || `task-${Date.now()}`,
+            taskId,
             payload: args.payload || args,
-            metadata: args.metadata,
+            metadata: isRecord(args.metadata) ? args.metadata : undefined,
             timestamp: new Date(),
           };
 
@@ -107,7 +117,7 @@ export class MCPServer {
 
           const agentOutput: AgentOutput = {
             id: this.agent.getId(),
-            taskId: args.taskId || `task-${Date.now()}`,
+            taskId,
             result: null,
             status: 'failure',
             error: error instanceof Error ? error : new Error(String(error)),

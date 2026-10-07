@@ -736,11 +736,11 @@ Root Package.json Dependencies
 │       └── For: Comparing DOM structures
 │
 ├── SQL Handling
-│   ├── sql-bricks 3.6.2
+│   ├── sql-bricks 3.0.1
 │   │   └── Used by: agent-sql-query-builder
 │   │   └── For: Programmatic SQL query building
 │   │
-│   └── sql-parser-cst 2.3.2
+│   └── sql-parser-cst 0.42.1
 │       └── Used by: agent-sql-query-builder
 │       └── For: SQL parsing, validation, AST analysis
 │
@@ -1087,4 +1087,3 @@ coverage-matrix.json (from agent-test-coverage)
 - **3 Parallel execution branches** (Planning, Discovery, Intelligence)
 - **Zero hardcoding** - Environment variables only
 - **Linear + Branching** execution flow
-

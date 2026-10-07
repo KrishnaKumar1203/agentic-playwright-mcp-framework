@@ -1,0 +1,42 @@
+{
+  "startTime": "2026-10-07T12:14:49.749Z",
+  "agents": [
+    {
+      "name": "agent-connector",
+      "status": "success",
+      "timestamp": "2026-10-07T12:14:50.214Z"
+    },
+    {
+      "name": "agent-catalog",
+      "status": "success",
+      "timestamp": "2026-10-07T12:14:50.325Z"
+    },
+    {
+      "name": "agent-test-plan",
+      "status": "success",
+      "timestamp": "2026-10-07T12:14:50.446Z"
+    },
+    {
+      "name": "agent-explorer",
+      "status": "success",
+      "timestamp": "2026-10-07T12:14:50.561Z"
+    },
+    {
+      "name": "agent-codegen",
+      "status": "success",
+      "timestamp": "2026-10-07T12:14:50.672Z"
+    },
+    {
+      "name": "agent-qa-gate",
+      "status": "success",
+      "timestamp": "2026-10-07T12:14:50.785Z"
+    },
+    {
+      "name": "agent-report-composer",
+      "status": "success",
+      "timestamp": "2026-10-07T12:14:50.894Z"
+    }
+  ],
+  "status": "completed",
+  "endTime": "2026-10-07T12:14:50.894Z"
+}

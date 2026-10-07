@@ -1,0 +1,17 @@
+name: Feature - Specialized agents
+
+on:
+  push:
+    paths:
+      - "packages/**"
+  pull_request:
+    paths:
+      - "packages/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    uses: ./.github/workflows/framework-checks.yml

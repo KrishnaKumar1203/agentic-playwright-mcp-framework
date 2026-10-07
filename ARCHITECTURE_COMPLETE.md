@@ -1025,11 +1025,11 @@ agentic-playwright-mcp-framework (root)
 │       └─ Compares: DOM structures, elements
 │
 ├─ SQL HANDLING
-│   ├─ sql-bricks 3.6.2
+│   ├─ sql-bricks 3.0.1
 │   │   └─ For: agent-sql-query-builder
 │   │   └─ Features: Programmatic SQL query building
 │   │
-│   └─ sql-parser-cst 2.3.2
+│   └─ sql-parser-cst 0.42.1
 │       └─ For: agent-sql-query-builder
 │       └─ Features: SQL parsing, AST analysis
 │

@@ -1,0 +1,17 @@
+{
+  "id": "6c9bf825-8b4c-4d4e-ad7d-68966c8e3e0d",
+  "taskId": "task-agent-test-plan-1791375290325",
+  "result": {
+    "id": "6c9bf825-8b4c-4d4e-ad7d-68966c8e3e0d",
+    "result": {
+      "planId": "VSTP-1791375290444",
+      "testCases": [],
+      "coverage": 0,
+      "timestamp": "2026-10-07T12:14:50.444Z"
+    },
+    "status": "success",
+    "timestamp": "2026-10-07T12:14:50.444Z"
+  },
+  "status": "success",
+  "timestamp": "2026-10-07T12:14:50.444Z"
+}

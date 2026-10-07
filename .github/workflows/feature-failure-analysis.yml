@@ -1,0 +1,17 @@
+name: Feature - Failure analysis
+
+on:
+  push:
+    paths:
+      - "packages/agent-failure-analyzer/**"
+  pull_request:
+    paths:
+      - "packages/agent-failure-analyzer/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    uses: ./.github/workflows/framework-checks.yml

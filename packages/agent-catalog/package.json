@@ -11,7 +11,7 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@agents/agents-core": "workspace:*"
+    "@agents/agents-core": "^1.0.0"
   },
   "devDependencies": {
     "@types/node": "^20.10.0",

@@ -1,0 +1,33 @@
+{
+  "version": 2,
+  "revision": 8,
+  "project_sha256": "5b7594f65926457b726c962674a32dd9e3e0bceb57869f64f4d51a89741a1748",
+  "intent_uuid": null,
+  "state_present": false,
+  "state_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "cursor_harness": "copilot",
+  "owner_session": "agent-host-copilotcli:/d539e60a-6330-40f9-92a7-bb41261b1acf",
+  "owner_epoch": 1,
+  "context_epoch": 0,
+  "kind": "print",
+  "stage": "coordination",
+  "delivery": "superseded",
+  "needs_rehydrate": true,
+  "active_attempt": {
+    "id": "call_Cri80oZ8aH6DS64KOAlYImPL__vscode-1791372142688",
+    "command_kind": "continue",
+    "command_sha256": "c457466be32b52abca7d778f56db37f7a67ef7c7918a4a0ed0a66713f764cfbf",
+    "issued_state_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "session_id": "agent-host-copilotcli:/d539e60a-6330-40f9-92a7-bb41261b1acf",
+    "owner_epoch": 1,
+    "context_epoch": 0,
+    "claim_revision": 7,
+    "status": "failed",
+    "cursor_input_sha256": "20bbfd139bae5a6e5d2342c7d2ecb3e0a136935336bb6908b46cfaaaf364fcc8"
+  },
+  "event_sequence": 4,
+  "human_sequence": 0,
+  "engine_sequence": 4,
+  "conversation_sequence": 0,
+  "stop_count": 0
+}

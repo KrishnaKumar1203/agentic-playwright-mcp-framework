@@ -6,7 +6,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 // Types for DevOps Operations
-interface DockerOperation {
+export interface DockerOperation {
   action: 'build' | 'run' | 'push' | 'pull' | 'stop' | 'deploy' | 'compose';
   imageName?: string;
   tags?: string[];
@@ -19,7 +19,7 @@ interface DockerOperation {
   registry?: string;
 }
 
-interface JenkinsOperation {
+export interface JenkinsOperation {
   action: 'trigger' | 'status' | 'build' | 'pipeline' | 'deploy' | 'logs';
   jobName?: string;
   buildNumber?: number;
@@ -27,7 +27,7 @@ interface JenkinsOperation {
   waitForCompletion?: boolean;
 }
 
-interface GitOperation {
+export interface GitOperation {
   action: 'clone' | 'commit' | 'push' | 'pull' | 'branch' | 'merge' | 'tag' | 'log';
   repo?: string;
   message?: string;
@@ -37,14 +37,14 @@ interface GitOperation {
   localPath?: string;
 }
 
-interface PostmanOperation {
+export interface PostmanOperation {
   action: 'run' | 'test' | 'export' | 'import' | 'lint';
   collectionFile?: string;
   environment?: string;
   resultsPath?: string;
 }
 
-interface CICDPipeline {
+export interface CICDPipeline {
   name: string;
   steps: {
     stage: string;
@@ -53,7 +53,7 @@ interface CICDPipeline {
   }[];
 }
 
-interface DevOpsOutput {
+export interface DevOpsOutput {
   success: boolean;
   operationType: string;
   results: {
@@ -608,12 +608,3 @@ class DevOpsAgent extends Agent {
 }
 
 export default DevOpsAgent;
-export {
-  DevOpsAgent,
-  DockerOperation,
-  JenkinsOperation,
-  GitOperation,
-  PostmanOperation,
-  CICDPipeline,
-  DevOpsOutput
-};

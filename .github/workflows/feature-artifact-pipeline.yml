@@ -1,0 +1,23 @@
+name: Feature - Artifact pipeline
+
+on:
+  push:
+    paths:
+      - "artifacts/**"
+      - "scripts/**"
+      - "packages/agent-orchestrator/**"
+      - "packages/agent-report-composer/**"
+  pull_request:
+    paths:
+      - "artifacts/**"
+      - "scripts/**"
+      - "packages/agent-orchestrator/**"
+      - "packages/agent-report-composer/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    uses: ./.github/workflows/framework-checks.yml

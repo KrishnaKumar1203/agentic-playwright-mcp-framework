@@ -1,15 +1,8 @@
 import { Agent, MCPClient } from '@agents/agents-core';
-import pino from 'pino';
 
 export class OrchestratorAgent extends Agent {
-  private logger: pino.Logger;
-
   constructor() {
     super('agent-orchestrator', '1.0.0');
-    this.logger = pino({
-      name: 'agent-orchestrator',
-      level: process.env.LOG_LEVEL || 'info',
-    });
   }
 
   async execute(input: any): Promise<any> {

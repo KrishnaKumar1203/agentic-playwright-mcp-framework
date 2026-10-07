@@ -13,9 +13,9 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@agents/agents-core": "workspace:*",
-    "sql-bricks": "^3.6.2",
-    "sql-parser-cst": "^2.3.2",
+    "@agents/agents-core": "^1.0.0",
+    "sql-bricks": "^3.0.1",
+    "sql-parser-cst": "^0.42.1",
     "uuid": "^9.0.1"
   },
   "devDependencies": {

@@ -1,0 +1,21 @@
+name: Feature - AI test generation
+
+on:
+  push:
+    paths:
+      - "packages/agent-test-plan/**"
+      - "packages/agent-codegen/**"
+      - "apps/example-webapp-tests/**"
+  pull_request:
+    paths:
+      - "packages/agent-test-plan/**"
+      - "packages/agent-codegen/**"
+      - "apps/example-webapp-tests/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    uses: ./.github/workflows/framework-checks.yml

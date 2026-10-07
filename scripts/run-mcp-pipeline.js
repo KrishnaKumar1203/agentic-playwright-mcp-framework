@@ -39,49 +39,49 @@ const pipelineAgents = [
   {
     name: 'Connection Resolution',
     agentName: 'agent-connector',
-    agentPath: '../packages/agent-connector/dist/mcp-server.js',
+    agentPath: '../packages/agent-connector/dist/connector.js',
     outputDir: RESOLVED_DIR,
     outputFile: 'connection-config.json',
   },
   {
     name: 'Service Catalog',
     agentName: 'agent-catalog',
-    agentPath: '../packages/agent-catalog/dist/mcp-server.js',
+    agentPath: '../packages/agent-catalog/dist/catalog-agent.js',
     outputDir: RESOLVED_DIR,
     outputFile: 'catalog.json',
   },
   {
     name: 'VSTP Building',
     agentName: 'agent-test-plan',
-    agentPath: '../packages/agent-test-plan/dist/mcp-server.js',
+    agentPath: '../packages/agent-test-plan/dist/vstp-builder.js',
     outputDir: VSTP_DIR,
     outputFile: 'test-plan.vstp.json',
   },
   {
     name: 'Element Discovery',
     agentName: 'agent-explorer',
-    agentPath: '../packages/agent-explorer/dist/mcp-server.js',
+    agentPath: '../packages/agent-explorer/dist/explorer-agent.js',
     outputDir: OBJECT_REPO_DIR,
     outputFile: 'elements.json',
   },
   {
     name: 'Code Generation',
     agentName: 'agent-codegen',
-    agentPath: '../packages/agent-codegen/dist/mcp-server.js',
+    agentPath: '../packages/agent-codegen/dist/spec-generator.js',
     outputDir: path.join(__dirname, '..', 'apps', 'example-webapp-tests', 'tests', 'generated'),
     outputFile: 'generated-specs.json',
   },
   {
     name: 'QA Gate Validation',
     agentName: 'agent-qa-gate',
-    agentPath: '../packages/agent-qa-gate/dist/mcp-server.js',
+    agentPath: '../packages/agent-qa-gate/dist/qa-validator.js',
     outputDir: QA_GATE_DIR,
     outputFile: 'qa-gate-report.json',
   },
   {
     name: 'Report Composition',
     agentName: 'agent-report-composer',
-    agentPath: '../packages/agent-report-composer/dist/mcp-server.js',
+    agentPath: '../packages/agent-report-composer/dist/report-composer.js',
     outputDir: REPORTS_DIR,
     outputFile: 'summary.json',
   },
@@ -144,13 +144,17 @@ async function runMCPPipeline() {
     }
 
     // Save pipeline log
-    pipelineLog.status = 'completed';
+    const hasFailures = pipelineLog.agents.some((agent) => agent.status === 'failure');
+    pipelineLog.status = hasFailures ? 'failed' : 'completed';
     pipelineLog.endTime = new Date();
     await saveArtifact(LOGS_DIR, 'pipeline-execution.json', pipelineLog);
 
-    logger.info('\n✨ MCP Pipeline execution completed!');
+    logger.info(`\n${hasFailures ? '⚠️ MCP Pipeline completed with failures.' : '✨ MCP Pipeline execution completed!'}`);
     logger.info(`📁 Artifacts saved to: ${ARTIFACTS_DIR}`);
     logger.info(`📝 Pipeline log: ${path.join(LOGS_DIR, 'pipeline-execution.json')}`);
+    if (hasFailures) {
+      process.exitCode = 1;
+    }
   } catch (error) {
     logger.error({ error: error instanceof Error ? error.message : String(error) }, '❌ Pipeline failed');
     process.exit(1);
@@ -160,10 +164,14 @@ async function runMCPPipeline() {
 /**
  * Execute an agent via MCP protocol
  */
-async function executeAgentViaMCP(agentName: string, agentPath: string, input: any): Promise<any> {
+async function executeAgentViaMCP(agentName, agentPath, input) {
   const { MCPClient } = await import('@agents/agents-core');
 
-  const client = new MCPClient(agentName, path.resolve(__dirname, agentPath));
+  const client = new MCPClient(
+    agentName,
+    path.join(__dirname, 'mcp-agent-server.js'),
+    [agentName, path.resolve(__dirname, agentPath)]
+  );
 
   try {
     await client.connect();
@@ -185,7 +193,7 @@ async function executeAgentViaMCP(agentName: string, agentPath: string, input: a
 /**
  * Validate that all agents are built
  */
-function validateAgentBuilds(): void {
+function validateAgentBuilds() {
   for (const agent of pipelineAgents) {
     const agentPath = path.resolve(__dirname, agent.agentPath);
     if (!fs.existsSync(agentPath)) {
@@ -201,7 +209,7 @@ function validateAgentBuilds(): void {
 /**
  * Save artifact output
  */
-async function saveArtifact(dir: string, filename: string, content: any): Promise<void> {
+async function saveArtifact(dir, filename, content) {
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir, { recursive: true });
   }

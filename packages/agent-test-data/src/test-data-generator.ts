@@ -123,13 +123,13 @@ export class TestDataGeneratorAgent extends Agent {
         return faker.person.firstName();
       
       case 'address':
-        return faker.location.address();
+        return faker.location.streetAddress();
       
       case 'custom':
         return pattern.customGenerator ? pattern.customGenerator() : null;
       
       default:
-        return faker.word.word();
+        return faker.word.words(1);
     }
   }
 

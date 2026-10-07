@@ -1,0 +1,17 @@
+name: Feature - Multi-environment support
+
+on:
+  push:
+    paths:
+      - "config/environments/**"
+  pull_request:
+    paths:
+      - "config/environments/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    uses: ./.github/workflows/framework-checks.yml

@@ -1,0 +1,19 @@
+name: Feature - Requirements coverage
+
+on:
+  push:
+    paths:
+      - "packages/agent-test-coverage/**"
+      - "packages/agent-functional/**"
+  pull_request:
+    paths:
+      - "packages/agent-test-coverage/**"
+      - "packages/agent-functional/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    uses: ./.github/workflows/framework-checks.yml

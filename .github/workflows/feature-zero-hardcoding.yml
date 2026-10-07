@@ -1,0 +1,19 @@
+name: Feature - Externalized configuration
+
+on:
+  push:
+    paths:
+      - "config/**"
+      - ".env.example"
+  pull_request:
+    paths:
+      - "config/**"
+      - ".env.example"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    uses: ./.github/workflows/framework-checks.yml

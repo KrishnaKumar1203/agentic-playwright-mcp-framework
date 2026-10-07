@@ -17,9 +17,9 @@
     "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
     "paths": {
-      "@agents/*": ["packages/*/src"],
-      "@core/*": ["packages/agents-core/src"],
-      "@types/*": ["packages/agents-core/src/types/*"]
+      "@agents/*": ["packages/*/dist"],
+      "@core/*": ["packages/agents-core/dist/*"],
+      "@types/*": ["packages/agents-core/dist/types/*"]
     }
   },
   "include": ["packages/*/src/**/*", "apps/*/src/**/*"],

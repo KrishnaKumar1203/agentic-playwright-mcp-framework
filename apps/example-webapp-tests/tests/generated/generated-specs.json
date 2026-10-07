@@ -1,0 +1,17 @@
+{
+  "id": "ab81b014-0853-4164-b997-7d7788ff5ed8",
+  "taskId": "task-agent-codegen-1791375290561",
+  "result": {
+    "id": "ab81b014-0853-4164-b997-7d7788ff5ed8",
+    "result": {
+      "files": [],
+      "totalSpecs": 0,
+      "language": "typescript",
+      "timestamp": "2026-10-07T12:14:50.670Z"
+    },
+    "status": "success",
+    "timestamp": "2026-10-07T12:14:50.670Z"
+  },
+  "status": "success",
+  "timestamp": "2026-10-07T12:14:50.670Z"
+}

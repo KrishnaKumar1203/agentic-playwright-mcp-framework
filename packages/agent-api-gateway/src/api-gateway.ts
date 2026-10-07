@@ -3,7 +3,7 @@ import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 
 // Types for API Gateway Operations
-interface APIEndpoint {
+export interface APIEndpoint {
   path: string;
   method: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' | 'HEAD' | 'OPTIONS';
   description?: string;
@@ -23,7 +23,7 @@ interface APIEndpoint {
   };
 }
 
-interface APIRequest {
+export interface APIRequest {
   endpoint: string;
   method: string;
   headers?: Record<string, string>;
@@ -36,7 +36,7 @@ interface APIRequest {
   timeout?: number;
 }
 
-interface APIResponse {
+export interface APIResponse {
   status: number;
   statusText: string;
   headers: Record<string, string>;
@@ -45,7 +45,7 @@ interface APIResponse {
   cached?: boolean;
 }
 
-interface APIDocumentation {
+export interface APIDocumentation {
   title: string;
   version: string;
   description?: string;
@@ -55,7 +55,7 @@ interface APIDocumentation {
   securitySchemes?: Record<string, any>;
 }
 
-interface APIGatewayOutput {
+export interface APIGatewayOutput {
   success: boolean;
   operationType: string;
   request?: APIRequest;
@@ -651,11 +651,3 @@ class APIGatewayAgent extends Agent {
 }
 
 export default APIGatewayAgent;
-export {
-  APIGatewayAgent,
-  APIEndpoint,
-  APIRequest,
-  APIResponse,
-  APIDocumentation,
-  APIGatewayOutput
-};

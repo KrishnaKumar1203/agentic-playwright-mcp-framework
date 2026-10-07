@@ -1,7 +1,7 @@
 import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js';
 import pino from 'pino';
-import { spawn, ChildProcess } from 'child_process';
+import { CallToolResultSchema } from '@modelcontextprotocol/sdk/types.js';
 import { AgentOutput } from './index.js';
 
 /**
@@ -10,14 +10,16 @@ import { AgentOutput } from './index.js';
  */
 export class MCPClient {
   private client: Client | null = null;
-  private process: ChildProcess | null = null;
+  private transport: StdioClientTransport | null = null;
   private logger: pino.Logger;
   private agentName: string;
   private agentPath: string;
+  private serverArgs: string[];
 
-  constructor(agentName: string, agentPath: string) {
+  constructor(agentName: string, agentPath: string, serverArgs: string[] = []) {
     this.agentName = agentName;
     this.agentPath = agentPath;
+    this.serverArgs = serverArgs;
     this.logger = pino({
       name: `mcp-client:${agentName}`,
       level: process.env.LOG_LEVEL || 'info',
@@ -34,24 +36,26 @@ export class MCPClient {
     );
 
     try {
-      // Spawn the agent process
-      this.process = spawn('node', [this.agentPath], {
-        stdio: ['pipe', 'pipe', 'pipe'],
+      const env = Object.fromEntries(
+        Object.entries(process.env).filter(
+          (entry): entry is [string, string] => entry[1] !== undefined
+        )
+      );
+      this.transport = new StdioClientTransport({
+        command: process.execPath,
+        args: [this.agentPath, ...this.serverArgs],
         env: {
-          ...process.env,
+          ...env,
           LOG_LEVEL: process.env.LOG_LEVEL || 'info',
         },
       });
-
-      if (!this.process.stdin || !this.process.stdout) {
-        throw new Error('Failed to create stdin/stdout pipes for agent');
-      }
-
-      // Create MCP client with stdio transport
-      const transport = new StdioClientTransport({
-        stdin: this.process.stdin,
-        stdout: this.process.stdout,
-      });
+      this.transport.onerror = (error) => {
+        this.logger.error({ error: error.message }, 'Agent transport error');
+      };
+      this.transport.onclose = () => {
+        this.client = null;
+        this.transport = null;
+      };
 
       this.client = new Client(
         {
@@ -63,19 +67,27 @@ export class MCPClient {
         }
       );
 
-      await this.client.connect(transport);
+      await this.client.connect(this.transport);
       this.logger.info('MCP client connected');
-
-      // Handle process errors
-      this.process.on('error', (error) => {
-        this.logger.error({ error: error.message }, 'Agent process error');
-      });
-
-      this.process.on('exit', (code, signal) => {
-        this.logger.warn({ code, signal }, 'Agent process exited');
-        this.client = null;
-      });
     } catch (error) {
+      const transport = this.transport;
+      this.client = null;
+      this.transport = null;
+      if (transport) {
+        try {
+          await transport.close();
+        } catch (cleanupError) {
+          this.logger.error(
+            {
+              error:
+                cleanupError instanceof Error
+                  ? cleanupError.message
+                  : String(cleanupError),
+            },
+            'Failed to close agent transport after connection error'
+          );
+        }
+      }
       this.logger.error(
         { error: error instanceof Error ? error.message : String(error) },
         'Failed to connect to MCP agent'
@@ -108,16 +120,23 @@ export class MCPClient {
           payload,
           metadata,
         },
-      });
+      }, CallToolResultSchema);
 
       // Parse the response
-      if (response.content.length === 0) {
+      if (!Array.isArray(response.content) || response.content.length === 0) {
         throw new Error('No response content from agent');
       }
 
       const content = response.content[0];
-      if (content.type !== 'text') {
-        throw new Error(`Unexpected response type: ${content.type}`);
+      if (
+        typeof content !== 'object' ||
+        content === null ||
+        !('type' in content) ||
+        content.type !== 'text' ||
+        !('text' in content) ||
+        typeof content.text !== 'string'
+      ) {
+        throw new Error('Unexpected response content from agent');
       }
 
       const result = JSON.parse(content.text) as AgentOutput;
@@ -146,21 +165,30 @@ export class MCPClient {
   public async disconnect(): Promise<void> {
     this.logger.info('Disconnecting from MCP agent');
 
-    if (this.client) {
-      try {
-        // The client will close the transport
-        this.client = null;
-      } catch (error) {
-        this.logger.error('Error closing MCP client');
-      }
-    }
+    const client = this.client;
+    const transport = this.transport;
+    this.client = null;
+    this.transport = null;
 
-    if (this.process) {
+    if (client) {
       try {
-        this.process.kill();
-        this.process = null;
+        await client.close();
       } catch (error) {
-        this.logger.error('Error killing agent process');
+        this.logger.error(
+          { error: error instanceof Error ? error.message : String(error) },
+          'Error closing MCP client'
+        );
+        throw error;
+      }
+    } else if (transport) {
+      try {
+        await transport.close();
+      } catch (error) {
+        this.logger.error(
+          { error: error instanceof Error ? error.message : String(error) },
+          'Error closing agent transport'
+        );
+        throw error;
       }
     }
   }
@@ -169,6 +197,6 @@ export class MCPClient {
    * Check if client is connected
    */
   public isConnected(): boolean {
-    return this.client !== null && this.process !== null;
+    return this.client !== null && this.transport !== null;
   }
 }

@@ -1,0 +1,17 @@
+name: Feature - Safe SQL queries
+
+on:
+  push:
+    paths:
+      - "packages/agent-sql-query-builder/**"
+  pull_request:
+    paths:
+      - "packages/agent-sql-query-builder/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    uses: ./.github/workflows/framework-checks.yml

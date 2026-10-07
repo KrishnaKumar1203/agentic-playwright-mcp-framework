@@ -1,0 +1,17 @@
+name: Feature - DOM change detection
+
+on:
+  push:
+    paths:
+      - "packages/agent-dom-analyzer/**"
+  pull_request:
+    paths:
+      - "packages/agent-dom-analyzer/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    uses: ./.github/workflows/framework-checks.yml

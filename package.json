@@ -6,10 +6,13 @@
   "engines": {
     "node": ">=18.0.0"
   },
+  "workspaces": [
+    "packages/*"
+  ],
 
   "scripts": {
     "dev": "concurrently \"npm run dev --workspaces\" --prefix-colors=auto",
-    "build": "npm run build --workspaces --if-present",
+    "build": "npm run build --workspace=@agents/agents-core && npm run build --workspaces --if-present",
     "test": "npm run test --workspaces --if-present",
     "pipeline": "node scripts/run-pipeline.js",
     "pipeline:mcp": "node scripts/run-mcp-pipeline.js",
@@ -36,8 +39,8 @@
     "cheerio": "^1.0.0-rc.12",
     "jsdom": "^23.0.1",
     "diff": "^5.1.0",
-    "sql-bricks": "^3.6.2",
-    "sql-parser-cst": "^2.3.2",
+    "sql-bricks": "^3.0.1",
+    "sql-parser-cst": "^0.42.1",
     "@modelcontextprotocol/sdk": "^0.5.0"
   }
 }

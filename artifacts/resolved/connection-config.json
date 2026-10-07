@@ -1,0 +1,16 @@
+{
+  "id": "ee684268-b74e-410d-a2ec-8167f1634b44",
+  "taskId": "task-agent-connector-1791375289749",
+  "result": {
+    "id": "ee684268-b74e-410d-a2ec-8167f1634b44",
+    "result": {
+      "status": "connected",
+      "environment": "ISB_DEV",
+      "timestamp": "2026-10-07T12:14:50.207Z"
+    },
+    "status": "success",
+    "timestamp": "2026-10-07T12:14:50.207Z"
+  },
+  "status": "success",
+  "timestamp": "2026-10-07T12:14:50.207Z"
+}
